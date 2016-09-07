@@ -1,0 +1,31 @@
+name: ${project.name}
+main: de.redstoneworld.redinteract.RedInteract
+version: '${minecraft.plugin.version}'
+description: ${project.description}
+authors: [Phoenix616]
+commands:
+   redinteract:
+      aliases: [ri]
+      description: Command description.
+      usage: /<command> reload|(add|remove) [<world> <x> <y> <z>]
+      permission: redinteract.command
+      permission-message: You don't have the permission <permission>
+permissions:
+   redinteract.command:
+      description: Gives permission to the plugin command
+      default: op
+   redinteract.command.add:
+      description: Gives permission to add new locations
+      default: op
+   redinteract.command.remove:
+      description: Gives permission to remove new locations
+      default: op
+   redinteract.command.remove:
+      description: Gives permission to add new locations
+      default: op
+   redinteract.command.reload:
+      description: Gives permission to reload the plugin
+      default: op
+   redinteract.bypass:
+      description: Gives permission to bypass all interaction limitations
+      default: op

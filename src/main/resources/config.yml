@@ -1,0 +1,2 @@
+# Timeout in seconds after running /redinteract add
+requesttimeout: 10
