@@ -20,6 +20,7 @@ public class InteractListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerBlockInteract(PlayerInteractEvent event) {
         if (plugin.hasPendingRequest(event.getPlayer())) {
+            event.setCancelled(true);
             handleRequest(event.getPlayer(), event.getClickedBlock().getLocation());
         } else if (event.isCancelled()){
             if (plugin.isRegistered(event.getClickedBlock().getLocation())) {
@@ -31,6 +32,7 @@ public class InteractListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerEntityInteract(PlayerInteractEntityEvent event) {
         if (plugin.hasPendingRequest(event.getPlayer())) {
+            event.setCancelled(true);
             handleRequest(event.getPlayer(), event.getRightClicked().getLocation());
         } else if (event.isCancelled()){
             if (plugin.isRegistered(event.getRightClicked().getLocation())) {
