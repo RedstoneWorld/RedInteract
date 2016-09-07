@@ -47,6 +47,22 @@ class LocationInfo {
         return toString().hashCode();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o != null && o instanceof LocationInfo) {
+            LocationInfo loc = (LocationInfo) o;
+            return loc.getWorldName().equals(this.getWorldName())
+                    && loc.getX() == this.getX()
+                    && loc.getY() == this.getY()
+                    && loc.getZ() == this.getZ();
+        }
+        return false;
+    }
+
     public static LocationInfo fromString(String locStr) {
         String[] parts = locStr.split(String.valueOf(STRING_SEPARATOR));
         if (parts.length == 4) {
