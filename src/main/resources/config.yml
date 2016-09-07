@@ -1,6 +1,6 @@
 # Timeout in seconds after running /redinteract add
 requestTimeout: 10
 # Chat prefix
-prefix: &f[&4RI&f]
+prefix: "&f[&4RI&f]"
 # Distance to search for locations with /ri nearby
 nearbyDistance: 16
