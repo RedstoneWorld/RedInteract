@@ -15,6 +15,8 @@ import java.util.logging.Level;
 
 public class RedInteract extends JavaPlugin {
 
+    private ConfigAccessor locationsConfig;
+
     private Set<LocationInfo> locations;
 
     private Map<UUID, InteractRequest> pendingRequests;
@@ -22,6 +24,7 @@ public class RedInteract extends JavaPlugin {
     private int requestTimeout;
 
     public void onEnable() {
+        locationsConfig = new ConfigAccessor(this, "locations.yml");
         loadConfig();
         getCommand("redinteract").setExecutor(new RedInteractCommand(this));
         getServer().getPluginManager().registerEvents(new InteractListener(this), this);
@@ -33,7 +36,9 @@ public class RedInteract extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         requestTimeout = getConfig().getInt("requesttimeout");
-        for (String locStr : getConfig().getStringList("locations")) {
+        locationsConfig.saveDefaultConfig();
+        locationsConfig.reloadConfig();
+        for (String locStr : locationsConfig.getConfig().getStringList("locations")) {
             try {
                 LocationInfo loc = LocationInfo.fromString(locStr);
                 locations.add(loc);
@@ -64,18 +69,18 @@ public class RedInteract extends JavaPlugin {
     public boolean execute(InteractRequest.Type type, LocationInfo loc) {
         if (type == InteractRequest.Type.ADD) {
             if (locations.add(loc)) {
-                List<String> locations = getConfig().getStringList("locations");
+                List<String> locations = locationsConfig.getConfig().getStringList("locations");
                 locations.add(loc.toString());
-                getConfig().set("locations", locations);
-                saveConfig();
+                locationsConfig.getConfig().set("locations", locations);
+                locationsConfig.saveConfig();
                 return true;
             }
         } else if (type == InteractRequest.Type.REMOVE) {
             if (locations.remove(loc)) {
-                List<String> locations = getConfig().getStringList("locations");
+                List<String> locations = locationsConfig.getConfig().getStringList("locations");
                 locations.remove(loc.toString());
-                getConfig().set("locations", locations);
-                saveConfig();
+                locationsConfig.getConfig().set("locations", locations);
+                locationsConfig.saveConfig();
                 return true;
             }
         }
