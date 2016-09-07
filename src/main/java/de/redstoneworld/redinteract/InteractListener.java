@@ -17,7 +17,7 @@ public class InteractListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerBlockInteract(PlayerInteractEvent event) {
         if (plugin.hasPendingRequest(event.getPlayer())) {
             event.setCancelled(true);
@@ -29,7 +29,7 @@ public class InteractListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerEntityInteract(PlayerInteractEntityEvent event) {
         if (plugin.hasPendingRequest(event.getPlayer())) {
             event.setCancelled(true);
