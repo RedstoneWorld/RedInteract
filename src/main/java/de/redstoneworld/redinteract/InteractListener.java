@@ -45,9 +45,9 @@ public class InteractListener implements Listener {
         InteractRequest request = plugin.getPendingRequest(player);
         LocationInfo loc = new LocationInfo(location);
         if (plugin.execute(request.getType(), loc)) {
-            player.sendMessage(ChatColor.GREEN + request.getType().toString() + "ED " + loc.toString());
+            player.sendMessage(plugin.getPrefix() + ChatColor.GREEN + " " + request.getType() + "ED " + loc);
         } else {
-            player.sendMessage(ChatColor.RED + "Failed to " + request.getType().toString() + " " + loc.toString() + "! It was " + (request.getType() == InteractRequest.Type.ADD ? "already" : "not") + " registered!");
+            player.sendMessage(plugin.getPrefix() + ChatColor.RED + " Failed to " + request.getType() + " " + loc + "! It was " + (request.getType() == InteractRequest.Type.ADD ? "already" : "not") + " registered!");
         }
         plugin.removePendingRequest(player);
     }

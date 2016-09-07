@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,8 @@ public class RedInteract extends JavaPlugin {
     private Map<UUID, InteractRequest> pendingRequests;
 
     private int requestTimeout;
+    private String prefix;
+    private int nearbyDistance;
 
     public void onEnable() {
         locationsConfig = new ConfigAccessor(this, "locations.yml");
@@ -35,7 +38,9 @@ public class RedInteract extends JavaPlugin {
         locations = new HashSet<LocationInfo>();
         saveDefaultConfig();
         reloadConfig();
-        requestTimeout = getConfig().getInt("requesttimeout");
+        requestTimeout = getConfig().getInt("requestTimeout");
+        prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix"));
+        nearbyDistance = getConfig().getInt("nearbyDistance");
         locationsConfig.reloadConfig();
         for (String locStr : locationsConfig.getConfig().getStringList("locations")) {
             try {
@@ -92,5 +97,43 @@ public class RedInteract extends JavaPlugin {
 
     public boolean isRegistered(LocationInfo loc) {
         return locations.contains(loc);
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public List<LocationInfo> getNearbyLocations(Location source) {
+        return getNearbyLocations(new LocationInfo(source));
+    }
+
+    private List<LocationInfo> getNearbyLocations(LocationInfo source) {
+        Map<Integer, List<LocationInfo>> distances = new HashMap<Integer, List<LocationInfo>>();
+
+        for (LocationInfo loc : locations) {
+            try {
+                int distanceSquared = loc.distanceSquared(source);
+                if (distanceSquared < nearbyDistance * nearbyDistance) {
+                    if (!distances.containsKey(distanceSquared)) {
+                        distances.put(distanceSquared, new ArrayList<LocationInfo>());
+                    }
+                    distances.get(distanceSquared).add(loc);
+                }
+            } catch (IllegalArgumentException e) {
+                // Do nothing
+            }
+        }
+
+        List<LocationInfo> locations = new ArrayList<LocationInfo>();
+        for (int i = 0; i < nearbyDistance * nearbyDistance; i++) {
+            if (distances.containsKey(i)) {
+                locations.addAll(distances.get(i));
+            }
+        }
+        return locations;
+    }
+
+    public int getNearbyDistance() {
+        return nearbyDistance;
     }
 }

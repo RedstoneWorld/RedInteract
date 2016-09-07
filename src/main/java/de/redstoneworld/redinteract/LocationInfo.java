@@ -25,15 +25,15 @@ class LocationInfo {
         return worldName;
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
-    public double getZ() {
+    public int getZ() {
         return z;
     }
 
@@ -77,5 +77,19 @@ class LocationInfo {
             return new LocationInfo(parts[0], coords[0], coords[1], coords[2]);
         }
         throw new IllegalArgumentException(locStr + " is not a valid location string with the format 'worldname x y z'!");
+    }
+
+    public int distanceSquared(LocationInfo loc) {
+        if(loc == null) {
+            throw new IllegalArgumentException("Cannot measure distance to a null location");
+        } else if(loc.getWorldName().equalsIgnoreCase(this.getWorldName())) {
+            return square(this.getX() - loc.getX()) + square(this.getY() - loc.getY()) + square(this.getZ() - loc.getZ());
+        } else {
+            throw new IllegalArgumentException("Cannot measure distance between two worlds (" + loc.getWorldName() + " - " + this.getWorldName() + ")");
+        }
+    }
+
+    private int square(int i) {
+        return i * i;
     }
 }
