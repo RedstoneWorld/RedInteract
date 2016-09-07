@@ -2,7 +2,7 @@ package de.redstoneworld.redinteract;
 
 import org.bukkit.Location;
 
-class LocationInfo {
+public class LocationInfo {
     private String worldName;
     private int x;
     private int y;
