@@ -36,7 +36,6 @@ public class RedInteract extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         requestTimeout = getConfig().getInt("requesttimeout");
-        locationsConfig.saveDefaultConfig();
         locationsConfig.reloadConfig();
         for (String locStr : locationsConfig.getConfig().getStringList("locations")) {
             try {
