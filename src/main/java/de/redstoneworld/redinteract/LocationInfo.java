@@ -8,6 +8,8 @@ class LocationInfo {
     private int y;
     private int z;
 
+    public final static char STRING_SEPARATOR = ' ';
+
     public LocationInfo(String worldName, int x, int y, int z) {
         this.worldName = worldName;
         this.x = x;
@@ -37,7 +39,7 @@ class LocationInfo {
 
     @Override
     public String toString() {
-        return worldName + "/" + x + "/" + y + "/" + z;
+        return worldName + STRING_SEPARATOR + x + STRING_SEPARATOR + y + STRING_SEPARATOR + z;
     }
 
     @Override
@@ -46,7 +48,7 @@ class LocationInfo {
     }
 
     public static LocationInfo fromString(String locStr) {
-        String[] parts = locStr.split("/");
+        String[] parts = locStr.split(String.valueOf(STRING_SEPARATOR));
         if (parts.length == 4) {
             int[] coords = new int[3];
             for (int i = 0; i < 3; i++) {
@@ -58,6 +60,6 @@ class LocationInfo {
             }
             return new LocationInfo(parts[0], coords[0], coords[1], coords[2]);
         }
-        throw new IllegalArgumentException(locStr + " is not a valid location string with the format 'worldname/x/y/z'!");
+        throw new IllegalArgumentException(locStr + " is not a valid location string with the format 'worldname x y z'!");
     }
 }
