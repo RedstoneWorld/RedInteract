@@ -47,7 +47,7 @@ public class InteractListener implements Listener {
         if (plugin.execute(request.getType(), loc)) {
             player.sendMessage(ChatColor.GREEN + request.getType().toString() + "ED " + loc.toString());
         } else {
-            player.sendMessage(ChatColor.RED + "Failed to " + request.getType() + toString() + " " + loc.toString() + "! It was " + (request.getType() == InteractRequest.Type.ADD ? "already" : "not") + " registered!");
+            player.sendMessage(ChatColor.RED + "Failed to " + request.getType().toString() + " " + loc.toString() + "! It was " + (request.getType() == InteractRequest.Type.ADD ? "already" : "not") + " registered!");
         }
         plugin.removePendingRequest(player);
     }
