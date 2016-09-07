@@ -57,7 +57,7 @@ public class RedInteractCommand implements CommandExecutor {
                                 }
                             }
 
-                            p.sendMessage(" " + loc + " - " + type);
+                            p.sendMessage(ChatColor.GRAY + " " + loc + ChatColor.WHITE + " - " + ChatColor.GRAY + type.toLowerCase());
                         }
                     } else {
                         p.sendMessage(ChatColor.RED + " None found!");
