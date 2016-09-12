@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -36,6 +37,15 @@ public class InteractListener implements Listener {
             handleRequest(event.getPlayer(), event.getRightClicked().getLocation());
         } else if (event.isCancelled()){
             if (plugin.isRegistered(event.getRightClicked().getLocation())) {
+                event.setCancelled(false);
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerBlockPlace(BlockPlaceEvent event) {
+        if (event.isCancelled()) {
+            if (event.getBlockPlaced().getType() == event.getBlockReplacedState().getType() && plugin.isRegistered(event.getBlock().getLocation())) {
                 event.setCancelled(false);
             }
         }
