@@ -7,7 +7,7 @@ commands:
    redinteract:
       aliases: [ri]
       description: Command description.
-      usage: /<command> reload|(add|remove) [<world> <x> <y> <z>]
+      usage: /<command> reload|nearby|(add|remove) [<world> <x> <y> <z>]
       permission: rwm.redinteract.command
       permission-message: You don't have the permission <permission>
 permissions:
