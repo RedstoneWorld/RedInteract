@@ -8,24 +8,24 @@ commands:
       aliases: [ri]
       description: Command description.
       usage: /<command> reload|(add|remove) [<world> <x> <y> <z>]
-      permission: redinteract.command
+      permission: rwm.redinteract.command
       permission-message: You don't have the permission <permission>
 permissions:
-   redinteract.command:
+   rwm.redinteract.command:
       description: Gives permission to the plugin command
       default: op
-   redinteract.command.add:
+   rwm.redinteract.command.add:
       description: Gives permission to add new locations
       default: op
-   redinteract.command.remove:
+   rwm.redinteract.command.remove:
       description: Gives permission to remove new locations
       default: op
-   redinteract.command.remove:
+   rwm.redinteract.command.remove:
       description: Gives permission to add new locations
       default: op
-   redinteract.command.reload:
-      description: Gives permission to reload the plugin
+   rwm.redinteract.command.nearby:
+      description: Gives permission to get nearby locations
       default: op
-   redinteract.bypass:
-      description: Gives permission to bypass all interaction limitations
+   rwm.redinteract.command.reload:
+      description: Gives permission to reload the plugin
       default: op

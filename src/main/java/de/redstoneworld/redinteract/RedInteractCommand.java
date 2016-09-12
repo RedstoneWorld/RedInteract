@@ -23,7 +23,7 @@ public class RedInteractCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length > 0) {
-            if ("reload".equalsIgnoreCase(args[0]) && sender.hasPermission("redinteract.command.reload")) {
+            if ("reload".equalsIgnoreCase(args[0]) && sender.hasPermission("rwm.redinteract.command.reload")) {
                 if (plugin.loadConfig()) {
                     sender.sendMessage(plugin.getPrefix() + ChatColor.GREEN + " Config reloaded!");
                 } else {
@@ -31,7 +31,7 @@ public class RedInteractCommand implements CommandExecutor {
                 }
                 return true;
 
-            } else if ("nearby".equalsIgnoreCase(args[0]) && sender.hasPermission("redinteract.command.reload")) {
+            } else if ("nearby".equalsIgnoreCase(args[0]) && sender.hasPermission("rwm.redinteract.command.nearby")) {
                 if (sender instanceof Player) {
                     Player p = (Player) sender;
                     p.sendMessage(plugin.getPrefix() + ChatColor.YELLOW + " Nearby locations:");
@@ -71,7 +71,7 @@ public class RedInteractCommand implements CommandExecutor {
             } else {
                 try {
                     InteractRequest.Type type = InteractRequest.Type.valueOf(args[0].toUpperCase());
-                    if (sender.hasPermission("redinteract.command." + type.toString().toLowerCase())) {
+                    if (sender.hasPermission("rwm.redinteract.command." + type.toString().toLowerCase())) {
 
                         if (args.length > 4) {
                             World world = plugin.getServer().getWorld(args[1]);
@@ -108,7 +108,7 @@ public class RedInteractCommand implements CommandExecutor {
                         }
 
                     } else {
-                        sender.sendMessage(ChatColor.RED + "You don't have the permission "  + ChatColor.WHITE + "redinteract.command." + type.toString().toLowerCase());
+                        sender.sendMessage(ChatColor.RED + "You don't have the permission "  + ChatColor.WHITE + "rwm.redinteract.command." + type.toString().toLowerCase());
                     }
 
                     return true;
