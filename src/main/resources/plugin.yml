@@ -18,7 +18,7 @@ permissions:
       description: Gives permission to add new locations
       default: op
    rwm.redinteract.command.remove:
-      description: Gives permission to remove new locations
+      description: Gives permission to remove registered locations
       default: op
    rwm.redinteract.command.nearby:
       description: Gives permission to get nearby locations
