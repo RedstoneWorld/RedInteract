@@ -53,8 +53,11 @@ public class InteractListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerBlockPlace(BlockPlaceEvent event) {
         if (event.isCancelled()) {
-            if (event.getBlockPlaced().getType() == event.getBlockReplacedState().getType() && plugin.isRegistered(event.getBlock().getLocation())) {
-                event.setCancelled(false);
+            // The block's type didn't change, only the blockstate:
+            if (event.getBlockPlaced().getType() == event.getBlockReplacedState().getType()) {
+                if (plugin.isRegistered(event.getBlock().getLocation())) {
+                    event.setCancelled(false);
+                }
             }
         }
     }
